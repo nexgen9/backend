@@ -13,7 +13,7 @@ app.use(cors())
 //databaseconnect with mongodb
 
 
-mongoose.connect("mongodb+srv://malek:12345@cluster0.hvk82.mongodb.net/")
+mongoose.connect(process.env.MONGODB_URL)
 .then(() => console.log("MongoDB connected"))
 .catch(error => console.log("MongoDB connection error:", error));
 
