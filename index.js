@@ -6,7 +6,7 @@ const path = require ("path")
 const multer = require ("multer")
 const cors =require ("cors")
 const mongoose =require("mongoose")
-
+ const baseurl=process.env.BASE_URL || "http://localhost:4000";
 app.use(express.json());
 app.use(cors())
 
@@ -49,7 +49,7 @@ app.post("/upload",upload.single("product"),(req,res)=>{
     }
     res.json({
         success: 1,
-        image_url: `http://localhost:4000/images/${req.file.filename}`
+        image_url: `${baseurl}/images/${req.file.filename}`
     });
    
 })
