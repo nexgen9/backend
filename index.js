@@ -5,15 +5,17 @@ const  jwt = require("jsonwebtoken")
 const path = require ("path")
 const multer = require ("multer")
 const cors =require ("cors")
+require('dotenv').config({ path: './.env' });
 const mongoose =require("mongoose")
- const baseurl=process.env.BASE_URL || "http://localhost:4000";
+ const baseurl=process.env.BASE_URL;
+ console.log(process.env.MONGODB_URL,process.env.BASE_URL);
 app.use(express.json());
 app.use(cors())
 
 //databaseconnect with mongodb
 
 
-mongoose.connect(process.env.MONGODB_URL)
+mongoose.connect("mongodb+srv://malek:12345@cluster0.hvk82.mongodb.net/")
 .then(() => console.log("MongoDB connected"))
 .catch(error => console.log("MongoDB connection error:", error));
 
@@ -49,7 +51,7 @@ app.post("/upload",upload.single("product"),(req,res)=>{
     }
     res.json({
         success: 1,
-        image_url: `${baseurl}/images/${req.file.filename}`
+        image_url: `https://backend-e8zy.onrender.com/images/${req.file.filename}`
     });
    
 })
@@ -240,6 +242,7 @@ app.get("/search", async (req, res) => {
 
 //getting all
 app.get("/allproducts",async (req,res)=>{
+ 
     let products = await  Product.find({});
    
 
